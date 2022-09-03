@@ -4,10 +4,16 @@ Random random = new Random (System.currentTimeMillis());
 message.set (37, Integer.toString(Math.abs(random.nextInt()) % 1000000));
 message.set (38, Integer.toString(Math.abs(random.nextInt()) % 1000000));
 
-if ("000000009999".equals (message.getString (4)))
-    message.set (39, "01");
-else
+System.out.println(message.getMTI());   
+
+if ("0200".equals (message.getMTI())){
     message.set (39, "00");
+    message.set (3,"900012");
+    }
+else {
+    message.set (39, "01");
+    message.set (3,message.getMTI());
+    }
 
 source.send (message);
 

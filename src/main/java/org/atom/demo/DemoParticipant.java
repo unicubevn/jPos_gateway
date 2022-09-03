@@ -19,10 +19,13 @@ public class DemoParticipant extends TxnSupport  {
         message.set(37, Integer.toString(Math.abs(random.nextInt()) % 1000000));
         // message.set(38, Integer.toString(Math.abs(random.nextInt()) % 1000000));
         message.set(38, Integer.toString(1234566));
-        if ("000000009999".equals(message.getString(4)))
-            message.set(39, "01");
-        else
-            message.set(39, "00");
+
+        
+        // if  ("000000009999".equals(message.getString(4)) || "0200".equals(message.getMTI()))  
+        //     message.set(39, "01");
+        // else
+        //     message.set(39, "00");
+        
         source.send(message);
         return PREPARED | NO_JOIN | READONLY;
     }
