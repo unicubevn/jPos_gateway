@@ -3,6 +3,11 @@
         <property name="host" value="localhost" />
         <property name="port" value="10000" />
     </channel>
+    <!-- <channel class="org.jpos.iso.channel.NACChannel" packager="org.jpos.iso.packager.XMLPackager">
+        <property name="host" value="localhost" />
+        <property name="port" value="10000" />
+        <property name="header" value="6000000000"/>
+    </channel> -->
     <in>jpos-send</in>
     <out>jpos-receive</out>
     <reconnect-delay>10000</reconnect-delay>

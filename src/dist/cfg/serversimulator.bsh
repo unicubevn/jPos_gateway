@@ -1,12 +1,13 @@
+String mti = message.getMTI();
 message.setResponseMTI ();
 
 Random random = new Random (System.currentTimeMillis());
 message.set (37, Integer.toString(Math.abs(random.nextInt()) % 1000000));
 message.set (38, Integer.toString(Math.abs(random.nextInt()) % 1000000));
 
-System.out.println(message.getMTI());   
+System.out.println("This is my test:" + mti);   
 
-if ("0200".equals (message.getMTI())){
+if ("0200".equals (mti)){
     message.set (39, "00");
     message.set (3,"900012");
     }
