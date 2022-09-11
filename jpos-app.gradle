@@ -1,18 +1,22 @@
 String archiveJarName="${project.name}-${project.version}.jar"
 String archiveWarName="${project.name}-${project.version}.war"
 String installDir=file("${project.buildDir}/install/${project.name}")
+
 project.ext {
     def target = project.hasProperty('target') ? target : 'devel'
     targetConfiguration = configure(new Properties()) {
+        put('jvm.options', '')                                  // empty default, so ReplaceTokens has something to work with
+        put('target', target)
         jarname = archiveJarName
         warname = archiveWarName
-        target  = target
         buildTimestamp = new Date().format("yyyy-MM-dd HH:mm:ss z")
+        rootProjectDir = this.rootProject.projectDir.toString()
     }
+
     File cfgFile = file("${rootProject.projectDir}/${target}.properties")
     if (cfgFile.exists()) {
         cfgFile.withInputStream{
-            targetConfiguration.load(it);
+            targetConfiguration.load(it)
         }
     }
 }
@@ -23,8 +27,6 @@ def jposCopySpec = copySpec {
         exclude 'cfg/*.lmk'
         exclude 'cfg/*.jks'
         exclude 'cfg/*.ks'
-        exclude 'cfg/*.ser'
-        exclude 'cfg/authorized_keys'
         exclude '**/*.jpg'
         exclude '**/*.gif'
         exclude '**/*.png'
@@ -32,20 +34,21 @@ def jposCopySpec = copySpec {
         exclude '**/*.ico'
         exclude '**/*.war'
         exclude '**/*.dat'
+        exclude '**/*.ser'
+        exclude '**/*.eot'
+        exclude '**/*.svg'
+        exclude '**/*.ttf'
+        exclude '**/*.woff'
+        exclude '**/*.woff2'
         filter(
-            org.apache.tools.ant.filters.ReplaceTokens, 
+            org.apache.tools.ant.filters.ReplaceTokens,
             tokens: targetConfiguration
         )
     }
     from(file("src/dist")) {
         include 'cfg/*.lmk'
-        include 'cfg/*.ks'
         include 'cfg/*.jks'
-        include 'cfg/*.ser'
-        include 'cfg/authorized_keys'
-        fileMode 0600
-    }
-    from(file("src/dist")) {
+        include 'cfg/*.ks'
         include '**/*.jpg'
         include '**/*.gif'
         include '**/*.png'
@@ -53,12 +56,20 @@ def jposCopySpec = copySpec {
         include '**/*.ico'
         include '**/*.war'
         include '**/*.dat'
+        include '**/*.ser'
+        include '**/*.eot'
+        include '**/*.svg'
+        include '**/*.ttf'
+        include '**/*.woff'
+        include '**/*.woff2'
     }
     from(jar) {
         rename archiveJarName, "${targetConfiguration.jarname}"
     }
     into("lib") {
-        from(configurations.runtimeClasspath)
+        from(configurations.runtimeClasspath) {
+            exclude "servlet-api*.jar"    // dependency hack
+        }
     }
     into("webapps") {
         from(file("build/libs")) {
@@ -67,37 +78,16 @@ def jposCopySpec = copySpec {
     }
 }
 
-def jposNoConfigCopySpec = copySpec {
-    from(jar) {
-        rename archiveJarName, "${targetConfiguration.jarname}"
-    }
-    into("lib") {
-        from(configurations.runtimeClasspath)
-    }
-}
-
 // Create the jar's manifest
 jar.manifest {
-    attributes \
+    attributes(
         'Implementation-Title': project.name,
         'Implementation-Version': project.version,
         'Main-Class': 'org.jpos.q2.Q2',
-        'Class-Path': configurations.runtimeClasspath.collect { "lib/" + it.getName() }.join(' ')
+        'Class-Path': configurations.runtimeClasspath.files.collect { "lib/" + it.getName() }.join(' ')
+    )
 }
 
-task sourceJar( type: Jar ) {
-    classifier = "sources"
-    from sourceSets.main.allSource
-}
-
-task javadocJar (type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from new File(project.buildDir, 'docs/javadoc')
-}
-
-artifacts {
-    archives sourceJar, javadocJar
-}
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {
@@ -106,50 +96,31 @@ processResources {
         include '**/*.cfg'
         include '**/*.asc'
         filter(
-            org.apache.tools.ant.filters.ReplaceTokens, 
+            org.apache.tools.ant.filters.ReplaceTokens,
             tokens: targetConfiguration
         )
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
 }
+
+
 //--------------------------------------------------
 // TASKS
 //--------------------------------------------------
 
 task version (type: JavaExec, dependsOn: classes) {
     description = "Shows jPOS Version"
-    mainClass = 'org.jpos.q2.Q2'
+    main = 'org.jpos.q2.Q2'
     args = ['--version']
     classpath configurations.runtimeClasspath
 }
 
 task dist(type: Tar) {
-    dependsOn 'assemble', 'sourceJar'
     description 'Creates tar distribution'
-    compression = Compression.GZIP
-    includeEmptyDirs true
-    into "$project.name-$project.version"
+    into "$project.name-$archiveVersion"
     with jposCopySpec
-    archiveExtension="tar.gz"
-}
-
-task distnc (type: Tar) {
-    dependsOn 'assemble', 'sourceJar'
-    description 'Creates tar distribution without configuration'
     compression = Compression.GZIP
-    includeEmptyDirs true
-    into "$project.name-$project.version"
-    with jposNoConfigCopySpec
-    archiveExtension="tar.gz"
-    archiveAppendix = "nc"
-}
-
-task zip(type: Zip) {
-    dependsOn 'assemble', 'sourceJar'
-    description 'Creates zip distribution'
-    includeEmptyDirs true
-    into "$project.name-$project.version"
-    with jposCopySpec
+    archiveExtension = "tar.gz"
 }
 
 task installApp(type: Sync) {
@@ -158,101 +129,16 @@ task installApp(type: Sync) {
     with jposCopySpec
 }
 
+task wrapper( type: Wrapper ) {
+    description = "Generate gradlew[.bat]"
+    gradleVersion = '6.0.1'
+}
+
 task installResources(dependsOn: 'classes', type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    mainClass = 'org.jpos.q2.install.Install'
+    main = 'org.jpos.q2.install.Install'
     args = ["--outputDir=src/dist"]
 }
-
-task run( dependsOn: 'installApp', type: Exec ) {
-    workingDir installDir
-    commandLine 'java','-jar', archiveJarName
-}
-
-/*
-task genDocker(type: Docker, dependsOn: 'jar') {
-    def projectName = project.name
-    applicationName = "${projectName}"
-    workingDir "/app"
-    addFile {
-        into('/app') {
-            with(jposCopySpec)
-        }
-    }
-    defaultCommand = ["/app/bin/q2"]
-}
-*/
-
-class GitRevisionTask extends DefaultTask
-{
-    @InputFile @Optional
-    File gitHead
-
-    @Input 
-    boolean gotHead
-
-    @InputFile @Optional
-    File getRefFile() {
-        if (gitHead != null) {
-            File rf = new File(gitHead.parent,gitHead.text.replace('ref: ', '').trim())
-            return rf.exists() ? rf : gitHead
-        } else {
-            return gitHead
-        }
-    }
-
-    @OutputFile
-    File outputFile
-
-    @TaskAction
-    public void writeFile()
-    {
-        Properties props=new Properties()
-        if (gotHead) {
-            File ref=getRefFile()
-            if (ref != null && ref.exists()) {
-                props.put("branch",ref.getName())
-                props.put("revision",ref.text.substring(0,7))
-            } else {
-                props.put("branch", "detached");
-                props.put("revision", gitHead.text.substring(0,7))
-            }
-        } else {
-            props.put("branch", "unknown");
-            props.put("revision", "unknown");
-        }
-        props.store(new FileOutputStream(outputFile),"Revision Properties")
-    }
-}
-
-class BuildTimestampTask extends DefaultTask {
-    @OutputFile
-    File outputFile
-
-    @TaskAction
-    public void writeFile() {
-        new File(outputFile.parent).mkdirs()
-        Properties props=new Properties()
-        props.put("projectName", project.name);
-        props.put("version", project.version);
-        props.put("buildTimestamp", new Date().format("yyyy-MM-dd HH:mm:ss z"));
-        props.store(new FileOutputStream(outputFile),"Revision Properties")
-    }
-}
-
-task createBuildTimestampPropertyFile(type: BuildTimestampTask) {
-    outputFile = "$sourceSets.main.output.resourcesDir/buildinfo.properties" as File
-}
-
-task createRevisionPropertyFile(type: GitRevisionTask) {
-    gitHead = "$rootDir/.git/HEAD" as File
-    gotHead = gitHead.exists()
-    if (!gotHead)
-        gitHead = null;
-    outputFile = "$sourceSets.main.output.resourcesDir/revision.properties" as File
-}
-
-processResources.dependsOn createBuildTimestampPropertyFile, createRevisionPropertyFile
 
 task viewTests (description: 'Open Test Reports') {
     doLast {

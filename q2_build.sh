@@ -1,1 +1,0 @@
-./gradlew installApp && build/install/jPos_gateway/bin/q2

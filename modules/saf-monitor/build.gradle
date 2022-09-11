@@ -1,0 +1,7 @@
+description = 'jPOS-EE :: Store and Forward (SAF) Monitor Module'
+
+dependencies {
+    api project(':modules:saf')
+    api project(':modules:status')
+}
+

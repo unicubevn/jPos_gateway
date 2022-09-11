@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+  ~ jPOS Project [http://jpos.org]
+  ~ Copyright (C) 2000-2012 Alejandro P. Revilla
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.jpos.gl.Account" table="acct" discriminator-value=" ">
+    <id name="id" column="id" type="long">
+      <generator class="native" />
+    </id>
+
+    <discriminator column="subclass" type="string" length="1" />
+    <property name="code" unique-key="AccountRootCode">
+      <column name="code" sql-type="varchar(255)" not-null="true" />
+    </property>
+    <many-to-one name="root"  not-null="false" foreign-key="FKAccountChart" lazy="false" unique-key="AccountRootCode" />
+
+    <property name="description" />
+    <property name="tags"  type="org.jpos.ee.usertype.TagsType">
+      <column name="tags" sql-type="varchar(255)" not-null="false" />
+    </property>
+    <property name="created"    type="date" />
+    <property name="expiration" type="date" />
+    <property name="type">
+     <column name="type" sql-type="smallint" />
+    </property>
+    <property name="currencyCode">
+     <column name="currency" sql-type="char(5)" />
+    </property>
+    <many-to-one name="parent" not-null="false" cascade="evict" foreign-key="FKAccountParent" lazy="false"/>
+    <subclass name="org.jpos.gl.CompositeAccount" discriminator-value="C">
+      <set name="children" cascade="all-delete-orphan,evict" sort="natural" lazy="true" inverse="true" batch-size="0">
+        <key column="parent" />
+        <!-- index column="posn" / -->
+        <one-to-many class="org.jpos.gl.Account" />
+      </set>
+    </subclass>
+    <subclass name="org.jpos.gl.FinalAccount" discriminator-value="F" />
+  </class>
+</hibernate-mapping>

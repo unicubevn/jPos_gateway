@@ -1,0 +1,50 @@
+plugins {
+   id 'com.devsoap.plugin.vaadin' version '2.0.0.beta2'
+}
+vaadin {
+    version=vaadinVersion
+    manageDependencies = true
+    manageRepositories = false
+}
+vaadinAddon {
+    title='QI'
+}
+
+vaadinCompile.gwtSdkFirstInClasspath=true
+vaadinThemeCompile.themesDirectory = "${webAppDir}/../resources/VAADIN/themes"
+
+dependencies {
+    api "com.vaadin:vaadin-server:${vaadinVersion}"
+    api "com.vaadin:vaadin-push:${vaadinVersion}"
+    api 'org.vaadin.addons:d3Gauge:1.0.1'
+    api 'org.vaadin.addons:dcharts-widget:1.7.0'
+    api 'com.vaadin:vaadin-context-menu:3.0.0'
+    api 'com.byteowls:vaadin-chartjs:0.3.0'
+    api 'org.vaadin.addons:vaadin-sliderpanel:2.0.0'
+    api "com.vaadin:vaadin-themes:${vaadin.version}"
+    api 'com.vaadin:vaadin-sass-compiler:0.9.13'
+
+    providedCompile project(':modules:core')
+    providedCompile project(':modules:visitor')
+    providedCompile project(':modules:syslog')
+    providedCompile project(':modules:sysconfig')
+    providedCompile project(':modules:jetty')
+
+    providedCompile "com.vaadin:vaadin-client:${vaadin.version}"
+    providedCompile "com.vaadin:vaadin-client-compiler:${vaadin.version}"
+    providedCompile 'com.vaadin.external.slf4j:vaadin-slf4j-jdk14:1.6.1'
+    providedCompile 'org.slf4j:jcl-over-slf4j:1.7.7'
+    providedCompile 'org.slf4j:jul-to-slf4j:1.7.7'
+    providedCompile 'com.atlassian.commonmark:commonmark:0.14.0'
+}
+
+jar {
+    from 'src/main/webapp'
+    exclude '**/gwt-unitCache/*'
+    exclude '**/gwt-unitCache'
+}
+
+jar.dependsOn("vaadinThemeCompile")
+jar.dependsOn("vaadinCompile")
+uploadArchives.dependsOn("jar", "publishMavenJavaPublicationToMavenRepository")
+

@@ -1,0 +1,26 @@
+apply plugin: 'java-platform'
+apply plugin: 'maven-publish'
+description = 'jPOS-EE :: BOM'
+
+dependencies {
+    constraints {
+        api libraries.jpos
+        rootProject.subprojects.each {
+            if (it.name != 'modules' && it.name != project.name)
+                api it
+        }
+        libraries.values().sort().forEach {
+            api it
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'jposee-bom'
+            from components.javaPlatform
+        }
+    }
+}
+

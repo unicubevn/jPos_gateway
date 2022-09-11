@@ -1,31 +1,40 @@
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
+apply from: 'libraries.gradle'
 
-group = 'org.jpos.template'
-version = '2.1.8-SNAPSHOT'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-String jposeeVersion = '2.2.8'
-
-repositories {
-    mavenCentral()
-    maven { url 'https://jpos.org/maven' }
-    mavenLocal()
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.owasp:dependency-check-gradle:6.1.5'
+    }
 }
 
-dependencies {
-    implementation 'org.jpos:jpos:2.1.8-SNAPSHOT'
-//    implementation group: 'org.jpos.ee', name: 'jposee-cryptoserver', version: '2.2.8'
-    implementation group:'org.jpos.ee',name:'jposee-server-simulator',version:'2.2.8'
-    implementation group:'org.jpos.ee',name:'jposee-core',version:'2.2.8'
-    implementation group:'org.jpos.ee',name:'jposee-txn',version:'2.2.8'
-    implementation group:'org.jpos.ee',name: 'jposee-db-postgresql', version: "${jposeeVersion}"
-    implementation "org.jpos.ee:jposee-sysconfig:${jposeeVersion}" 
-    implementation "org.jpos.ee:jposee-eeuser:${jposeeVersion}"
-    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.owasp.dependencycheck'
+
+    group = 'org.jpos.ee'
+    version = '2.2.9-SNAPSHOT'
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
 }
 
-apply from: 'jpos-app.gradle'
+subprojects {
+    apply from: "${rootProject.projectDir}/publishing.gradle"
+    if (name != 'bom') {
+        apply from: "${rootProject.projectDir}/subprojects.gradle"
+    }
+}
+
+// Configure IDEA to use Git
+idea.project.ipr {
+  withXml { provider ->
+    provider.node.component.find { it.@name == 'VcsDirectoryMappings' }.mapping.@vcs = 'Git'
+  }
+}
 
