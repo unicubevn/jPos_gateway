@@ -20,15 +20,24 @@
 
 <logger name="Q2" class="org.jpos.q2.qbean.LoggerAdaptor">
   <property name="redirect" value="stdout, stderr" />
-  <!--
-  <log-listener class="org.jpos.util.ProtectedLogListener">
-    <property name="protect" value="2 14 35 45" />
-    <property name="wipe"    value="52 55 120" />
-  </log-listener>
-  -->
+
   <log-listener class="org.jpos.util.SimpleLogListener" />
 
- <log-listener class="org.jpos.util.BufferedLogListener">
+  <!-- On/off the Protected Log, which protect the sensitive data -->
+  <log-listener class="org.jpos.util.ProtectedLogListener">
+    <property name="protect" value="2 14 35 45" />
+    <property name="wipe" value="52 55 120" />
+  </log-listener>
+  <!-- This log listener performs the same task as ProtectedLogListener but for FSDMsg and FSDISOMsg instances. 
+    And since its usage is the same, we just focus on its configuration part. -->
+  <log-listener class="org.jpos.util.FSDProtectedLogListener">
+    <property name="protect" value="2 35 pan track2" />
+    <property name="wipe" value="pin 52" />
+    <property name="truncate" value="field1:100 field2:50" />
+  </log-listener>
+
+
+  <log-listener class="org.jpos.util.BufferedLogListener">
     <property name="size" value="250" />
     <property name="name" value="logger.Q2.buffered" />
   </log-listener>
@@ -48,13 +57,13 @@
     <property name="window" value="86400" /> <!-- optional, default one day -->
     <!--needed-->
     <property name="prefix" value="log/q2" />
-    <property name="suffix" value=".log"/> <!-- optional -->
+    <property name="suffix" value=".log" /> <!-- optional -->
 
     <!--optional the default is "-yyyy-MM-dd" -->
-    <property name="date-format" value="-yyyy-MM-dd-HH"/>
+    <property name="date-format" value="-yyyy-MM-dd-HH" />
 
     <!--optional the default is gzip-->
-    <property name="compression-format" value="gzip"/> 
+    <property name="compression-format" value="gzip" />
 
     <!--optional the default is .zip for zip, .gz for gzip-->
     <!--
@@ -84,4 +93,17 @@
      and the formats are HH:mm:ss and yyyy-MM-dd respectively
     -->
   </log-listener>
+
+  <!-- <log-listener class="org.jpos.util.SysLogListener">
+    <property name="facility" value="16" />
+    <property name="severity" value="6" />
+    <property name="host" value="localhost" />
+    <property name="port" value="514" />
+    <property name="tags" value="audit, syslog" />
+    <property name="prefix" value="[jPOS]" />
+    <property name="syslog.facility" value="21" />
+    <property name="syslog.severity" value="5" />
+    <property name="audit.facility" value="21" />
+    <property name="audit.severity" value="4" />
+  </log-listener> -->
 </logger>
