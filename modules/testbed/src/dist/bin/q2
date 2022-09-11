@@ -8,7 +8,7 @@ java -server \
     -Duser.name=admin \
     -Dcom.sun.management.jmxremote \
     -Duser.name=admin \
-    -Xloggc:log/gc.log \
+    -Xlog:gc:log/gc.log \
     -Dorg.mortbay.xml.XmlParser.NotValidating=true \
     -Xmx1G -Xms1G \
     -jar jposee-@jarname@ "$@"
