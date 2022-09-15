@@ -4,8 +4,15 @@
     <property name="max-sessions" value="128" />
     <property name="debug" value="true" />
 
-    <participant class="org.jpos.testbed.SelectDestination"> <property name="bin.411111" value="MYMUX" />
-    </participant>
+    <!-- <participant class="org.jpos.testbed.SelectDestination"> <property name="bin.411111" value="MYMUX" />
+    </participant> -->
+    <!-- Prepare the Context Variables for transaction -->
+    <participant class="org.jpos.testbed.txnmgr.PrepareContext" logger="Q2" realm="PrepareContext" />
+
+    <participant class="org.jpos.transaction.Open" logger="Q2" realm="open">
+        <property name="checkpoint" value="open" />
+        <property name="timeout" value="300" /> </participant>
+
     <participant class="org.jpos.transaction.participant.QueryHost" />
     <participant class="org.jpos.transaction.participant.SendResponse" />
 </txnmgr>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"[
+     <!ENTITY connection_info SYSTEM "file:///c://xxx//yyy/connection.xml">
+ ]>
+
+ <hibernate-configuration>
+    <session-factory>
+        <mapping resource="org/jpos/ee/SysConfig.hbm.xml" />
+        <mapping resource="org/jpos/ee/SysLogEvent.hbm.xml" />
+        <mapping resource="org/jpos/ee/User.hbm.xml" />
+        <mapping resource="org/jpos/ee/Visitor.hbm.xml" />
+        <mapping resource="org/jpos/ee/RevisionEntry.hbm.xml" />
+        <mapping resource="org/jpos/ee/ResultCode.hbm.xml" />
+<!-- Put your resource mapping here -->
+    </session-factory>
+</hibernate-configuration>

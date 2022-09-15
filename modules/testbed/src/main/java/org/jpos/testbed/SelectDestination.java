@@ -3,7 +3,8 @@ package org.jpos.testbed;
 import org.jpos.core.*;
 import org.jpos.iso.ISOMsg;
 import org.jpos.transaction.Context;
-import org.jpos.transaction.ContextConstants; import org.jpos.transaction.TransactionParticipant;
+import org.jpos.transaction.ContextConstants; 
+import org.jpos.transaction.TransactionParticipant;
 import java.io.Serializable;
 
 

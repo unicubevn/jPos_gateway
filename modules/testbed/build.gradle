@@ -24,9 +24,14 @@ dependencies {
     providedCompile project(':modules:visitor')
     providedCompile project(':modules:jetty')
     providedCompile project(':modules:cryptoservice')
+    providedCompile project(':modules:qrest')
+    providedCompile project(':modules:minigl')
+    providedCompile project(':modules:resultcode')
+    providedCompile project(':modules:txn')
+    providedCompile project(':modules:things')
 
     providedCompile project(':modules:server-simulator')
-    providedCompile project(':modules:txn')
+    
 
 
     providedCompile 'org.postgresql:postgresql:42.5.0'
