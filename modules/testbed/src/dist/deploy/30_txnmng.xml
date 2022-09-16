@@ -4,8 +4,9 @@
     <property name="max-sessions" value="128" />
     <property name="debug" value="true" />
 
-    <participant class="org.jpos.testbed.SelectDestination"> <property name="bin.411111" value="MYMUX" />
-    </participant>
-    <participant class="org.jpos.transaction.participant.QueryHost" />
-    <participant class="org.jpos.transaction.participant.SendResponse" />
+    <!-- <participant class="org.jpos.testbed.SelectDestination"> <property name="bin.411111" value="MYMUX" />
+    </participant> -->
+    <!-- <participant class="org.jpos.transaction.participant.QueryHost" /> -->
+    <participant class="org.jpos.testbed.txnmgr.AtomQueryHost"/>
+    <!-- <participant class="org.jpos.transaction.participant.SendResponse" /> -->
 </txnmgr>
