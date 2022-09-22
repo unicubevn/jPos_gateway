@@ -1,0 +1,3 @@
+#!/bin/bash
+exec /home/jpos/gateway/modules/testbed/build/install/testbed/bin/q2 "$*"
+
