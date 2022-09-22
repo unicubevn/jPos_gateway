@@ -2,19 +2,24 @@ String mti = message.getMTI();
 message.setResponseMTI ();
 
 Random random = new Random (System.currentTimeMillis());
-message.set (37, Integer.toString(Math.abs(random.nextInt()) % 1000000));
-message.set (38, Integer.toString(Math.abs(random.nextInt()) % 1000000));
 
-System.out.println("This is my test:" + mti);   
+//message.set (37, Integer.toString(Math.abs(random.nextInt()) % 1000000));
+//message.set (38, Integer.toString(Math.abs(random.nextInt()) % 1000000));
+
+System.out.println("Server processing the message: " + mti);   
 
 if ("0200".equals (mti)){
     message.set (39, "00");
     message.set (3,"900012");
     }
-else {
-    message.set (39, "01");
-    message.set (3,message.getMTI());
-    }
 
+if ("0800".equals (mti)){
+    message.set (39, "00");
+    message.set (3,"900000");
+    message.set (24,"002");
+    message.unset("42");
+    message.set("53","EA1C561B11D288E6");
+    }
+message.recalcBitMap();
 source.send (message);
 

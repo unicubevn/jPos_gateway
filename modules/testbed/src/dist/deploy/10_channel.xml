@@ -1,13 +1,14 @@
 <channel-adaptor name='jpos-channel' class="org.jpos.q2.iso.ChannelAdaptor" logger="Q2">
-    <channel class="org.jpos.iso.channel.XMLChannel" packager="org.jpos.iso.packager.XMLPackager">
+    <!-- <channel class="org.jpos.iso.channel.XMLChannel" packager="org.jpos.iso.packager.XMLPackager">
         <property name="host" value="localhost" />
         <property name="port" value="10000" />
-    </channel>
-    <!-- <channel class="org.jpos.iso.channel.NACChannel" packager="org.jpos.iso.packager.XMLPackager">
-        <property name="host" value="localhost" />
-        <property name="port" value="10000" />
-        <property name="header" value="6000000000"/>
     </channel> -->
+    <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.iso.packager.ISO87BPackager"
+    header="6000190002">
+        <property name="host" value="localhost" />
+        <property name="port" value="10000" />
+        <!-- <property name="header" value="6000190002"/> -->
+    </channel>
     <in>jpos-send</in>
     <out>jpos-receive</out>
     <reconnect-delay>10000</reconnect-delay>

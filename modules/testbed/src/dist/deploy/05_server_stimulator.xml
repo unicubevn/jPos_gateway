@@ -20,7 +20,17 @@
 <server class="org.jpos.q2.iso.QServer" logger="Q2" name="simulator_10000">
   <attr name="port" type="java.lang.Integer">10000</attr>
 
-  <!-- <channel class="org.jpos.iso.channel.NACChannel" logger="Q2" packager="org.jpos.iso.packager.XMLPackager">
+  <channel class="org.jpos.iso.channel.NCCChannel" logger="Q2" packager="org.jpos.iso.packager.ISO87BPackager"
+  header="6000190002">
+    <!-- <filter class='org.jpos.iso.filter.ChannelInfoFilter' direction='both'>
+      <property name='channel-name' value='1000' />
+      <property name='socket-info' value='1001' />
+    </filter> -->
+    <!-- <filter class='org.jpos.iso.filter.DelayFilter' direction='both'>
+      <property name='delay' value='3000' />
+    </filter> -->
+  </channel>
+  <!-- <channel class="org.jpos.iso.channel.XMLChannel" logger="Q2" packager="org.jpos.iso.packager.XMLPackager">
     <filter class='org.jpos.iso.filter.ChannelInfoFilter' direction='both'>
       <property name='channel-name' value='1000' />
       <property name='socket-info' value='1001' />
@@ -29,15 +39,6 @@
       <property name='delay' value='5000' />
     </filter>
   </channel> -->
-  <channel class="org.jpos.iso.channel.XMLChannel" logger="Q2" packager="org.jpos.iso.packager.XMLPackager">
-    <filter class='org.jpos.iso.filter.ChannelInfoFilter' direction='both'>
-      <property name='channel-name' value='1000' />
-      <property name='socket-info' value='1001' />
-    </filter>
-    <filter class='org.jpos.iso.filter.DelayFilter' direction='both'>
-      <property name='delay' value='5000' />
-    </filter>
-  </channel>
 
   <request-listener class="org.jpos.bsh.BSHRequestListener" logger="Q2">
     <property name="source" value="cfg/serversimulator.bsh" />
