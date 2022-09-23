@@ -18,7 +18,7 @@ if ("0800".equals (mti)){
     message.set (3,"900000");
     message.set (24,"002");
     message.unset("42");
-    message.set("53","EA1C561B11D288E6");
+    message.set("53","7679D221F1FB8D31744646590F48023CA9E25D0000000000");
     }
 message.recalcBitMap();
 source.send (message);
