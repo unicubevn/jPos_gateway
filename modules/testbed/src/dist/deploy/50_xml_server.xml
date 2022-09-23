@@ -4,7 +4,7 @@
         type="server" logger="Q2" realm="xml-server-8081">
         <property name="timeout" value="180000" />
     </channel> -->
-    <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.iso.packager.ISO87BPackager"
+    <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.testbed.packager.SacomPackager"
             header="6000190002"
             type="server" logger="Q2" realm="NACC-server-8081" >
         <property name="timeout" value="180000" />

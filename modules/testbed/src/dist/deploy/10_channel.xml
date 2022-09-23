@@ -3,7 +3,7 @@
         <property name="host" value="localhost" />
         <property name="port" value="10000" />
     </channel> -->
-    <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.iso.packager.ISO87BPackager"
+    <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.testbed.packager.SacomPackager"
     header="6000190002">
         <property name="host" value="localhost" />
         <property name="port" value="10000" />
