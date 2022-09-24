@@ -17,7 +17,7 @@ import org.jpos.iso.IFB_HEX;
 public class SacomPackager extends AtomPackager{
     public SacomPackager() {
         super();
-        fld[53]  =  new IFB_HEX ( 48, "SECURITY RELATED CONTROL INFORMATION", true);
+        // fld[53]  =  new IFB_HEX ( 48, "SECURITY RELATED CONTROL INFORMATION", true);
         setFieldPackager(fld);
     }
 }

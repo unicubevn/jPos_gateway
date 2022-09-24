@@ -1,6 +1,6 @@
 package org.jpos.testbed.packager;
 
-import org.jpos.iso.packager.ISO87BPackager;
+import org.jpos.iso.packager.ISO93BPackager;
 
 /**
  * ISO 8583 v1987 BINARY Packager
@@ -13,7 +13,7 @@ import org.jpos.iso.packager.ISO87BPackager;
  * @see ISOComponent
  * @see ISO87BPackager
  */
-public class AtomPackager extends ISO87BPackager{
+public class AtomPackager extends ISO93BPackager{
     public AtomPackager() {
         super();
         setFieldPackager(fld);
