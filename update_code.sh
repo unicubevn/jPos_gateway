@@ -1,0 +1,1 @@
+ssh ba '. ~/update_jpos.sh'

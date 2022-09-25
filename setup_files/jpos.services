@@ -1,0 +1,16 @@
+[Unit]
+Description=Bean Bakery ERP Server
+#Requires=postgresql.service
+#After=network.target postgresql.service
+
+[Service]
+User=jpos
+Group=jpos
+Type=simple
+SyslogIdentifier=jpos
+PermissionsStartOnly=true
+ExecStart=/home/jpos/gateway/bin/q2_prod
+StandardOutput=journal+console
+
+[Install]
+WantedBy=multi-user.target
