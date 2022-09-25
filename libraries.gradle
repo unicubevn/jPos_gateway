@@ -34,6 +34,7 @@ ext {
 
             //jPOS
             jpos: "org.jpos:jpos:${jposVersion}",
+        //     jpos: "project(:modules:libs)",
 
             //Apache Commons
             commons_lang: 'org.apache.commons:commons-lang3:3.9',

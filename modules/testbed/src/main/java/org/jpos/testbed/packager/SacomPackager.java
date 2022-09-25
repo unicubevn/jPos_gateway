@@ -1,6 +1,6 @@
 package org.jpos.testbed.packager;
 
-import org.jpos.iso.IFB_HEX;
+import org.jpos.iso.IFB_LLLHEX;
 
 /**
  * ISO 8583 v1987 BINARY Packager
@@ -17,7 +17,7 @@ import org.jpos.iso.IFB_HEX;
 public class SacomPackager extends AtomPackager{
     public SacomPackager() {
         super();
-        // fld[53]  =  new IFB_HEX ( 48, "SECURITY RELATED CONTROL INFORMATION", true);
+        fld[55]  =  new IFB_LLLHEX ( 255,"IC card system related data");
         setFieldPackager(fld);
     }
 }

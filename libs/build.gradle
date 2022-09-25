@@ -1,0 +1,6 @@
+description = 'jPOS-EE :: Load local jpos'
+
+dependencies {
+    implementation( files("jpos.jar"))
+}
+
