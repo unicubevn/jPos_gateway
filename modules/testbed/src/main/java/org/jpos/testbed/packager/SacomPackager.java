@@ -17,7 +17,7 @@ import org.jpos.iso.IFB_LLLHEX;
 public class SacomPackager extends AtomPackager{
     public SacomPackager() {
         super();
-        fld[55]  =  new IFB_LLLHEX ( 255,"IC card system related data");
+        
         setFieldPackager(fld);
     }
 }
