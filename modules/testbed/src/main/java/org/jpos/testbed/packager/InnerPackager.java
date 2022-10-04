@@ -7,25 +7,13 @@ import org.jpos.iso.IFB_HEX;
 import org.jpos.iso.IFB_LLCHAR;
 import org.jpos.iso.IFB_LLLBINARY;
 import org.jpos.iso.IFB_LLLCHAR;
-import org.jpos.iso.IFB_LLLHEX;
 import org.jpos.iso.IFB_LLNUM;
 import org.jpos.iso.IFB_NUMERIC;
 import org.jpos.iso.IF_CHAR;
 import org.jpos.iso.ISOBasePackager;
 import org.jpos.iso.ISOFieldPackager;
 
-/**
- * ISO 8583 v1987 BINARY Packager
- * Apply ATOM's custom rule
- * 
- * @author ATOM
- * @version v1.0
- * @see ISOPackager
- * @see ISOBasePackager
- * @see ISOComponent
- * @see ISO87BPackager
- */
-public class AtomPackager extends ISOBasePackager{
+public class InnerPackager extends ISOBasePackager {
     private static final boolean pad = false;
     protected ISOFieldPackager fld[] = {
         /*000*/    new IFB_NUMERIC(  4, "MESSAGE TYPE INDICATOR", true),
@@ -48,12 +36,12 @@ public class AtomPackager extends ISOBasePackager{
             /*017*/    new IFB_NUMERIC (  4, "DATE, CAPTURE", true),
             /*018*/    new IFB_NUMERIC (  4, "MERCHANTS TYPE", true),
             /*019*/    new IFB_NUMERIC (  3, "ACQUIRING INSTITUTION COUNTRY CODE", true),
-            /*020*/    new IFB_NUMERIC (  3, "PAN EXTENDED COUNTRY CODE", true),
-            /*021*/    new IFB_NUMERIC (  3, "FORWARDING INSTITUTION COUNTRY CODE", true),
-            /*022*/    new IFB_NUMERIC (  3, "POINT OF SERVICE ENTRY MODE", true),
-            /*023*/    new IFB_NUMERIC (  3, "CARD SEQUENCE NUMBER", true),
-            /*024*/    new IFB_NUMERIC (  3, "NETWORK INTERNATIONAL IDENTIFIEER", true),
-            /*025*/    new IFB_NUMERIC (  2, "POINT OF SERVICE CONDITION CODE", true),
+            /*020*/    new IF_CHAR (  24, "PAN EXTENDED COUNTRY CODE"),
+            /*021*/    new IFB_NUMERIC (  24, "FORWARDING INSTITUTION COUNTRY CODE", true),
+            /*022*/    new IFB_HEX (  64, "POINT OF SERVICE ENTRY MODE", true),
+            /*023*/    new IFB_HEX (  32, "CARD SEQUENCE NUMBER", true),
+            /*024*/    new IFB_HEX (  32, "NETWORK INTERNATIONAL IDENTIFIEER", true),
+            /*025*/    new IFB_HEX (  32, "POINT OF SERVICE CONDITION CODE", true),
             /*026*/    new IFB_NUMERIC (  2, "POINT OF SERVICE PIN CAPTURE CODE", true),
             /*027*/    new IFB_NUMERIC (  1, "AUTHORIZATION IDENTIFICATION RESP LEN",true),
             /*028*/    new IFB_AMOUNT(  9, "AMOUNT, TRANSACTION FEE", true),
@@ -160,8 +148,9 @@ public class AtomPackager extends ISOBasePackager{
             /*127*/ new IFB_LLLCHAR (999, "Reserved for private use"),
             /*128*/ new IFB_BINARY  (  8, "Message authentication code field")
         };
-    public AtomPackager() {
+    public InnerPackager() {
         super();
         setFieldPackager(fld);
     }
+
 }

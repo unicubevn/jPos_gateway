@@ -3,13 +3,13 @@
         <property name="host" value="localhost" />
         <property name="port" value="10000" />
     </channel> -->
-    <!-- <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.testbed.packager.SacomPackager"
+    <!-- <channel class="org.jpos.iso.channel.NCCChannel" packager="org.atom.gateway.packager.SacomPackager"
     header="6000190002">
         <property name="host" value="127.0.0.1" />
         <property name="port" value="10000" />
     </channel> -->
 
-    <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.testbed.packager.SacomPackager"
+    <channel class="org.jpos.iso.channel.NCCChannel" packager="org.atom.gateway.packager.SacomPackager"
     header="6000190002">
         <property name="host" value="113.164.14.80" />
         <property name="port" value="13250" />

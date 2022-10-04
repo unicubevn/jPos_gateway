@@ -1,4 +1,4 @@
-package org.jpos.testbed.txnmgr;
+package org.atom.gateway.txnmgr;
 
 import java.io.IOException;
 import java.io.Serializable;

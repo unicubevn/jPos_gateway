@@ -1,4 +1,4 @@
-package org.jpos.testbed.packager;
+package org.atom.gateway.packager;
 
 import org.jpos.iso.IFB_AMOUNT;
 import org.jpos.iso.IFB_BINARY;
