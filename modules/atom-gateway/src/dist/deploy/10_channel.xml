@@ -1,27 +1,38 @@
 <channel-adaptor name='jpos-channel' class="org.jpos.q2.iso.ChannelAdaptor" logger="Q2">
-    <!-- <channel class="org.jpos.iso.channel.XMLChannel" packager="org.jpos.iso.packager.XMLPackager">
-        <property name="host" value="localhost" />
-        <property name="port" value="10000" />
-    </channel> -->
-    <!-- <channel class="org.jpos.iso.channel.NCCChannel" packager="org.atom.gateway.packager.SacomPackager"
-    header="6000190002">
-        <property name="host" value="127.0.0.1" />
-        <property name="port" value="10000" />
-    </channel> -->
 
-    <channel class="org.jpos.iso.channel.NCCChannel" packager="org.atom.gateway.packager.SacomPackager"
+    <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.iso.packager.GenericPackager"
     header="6000190002">
         <property name="host" value="113.164.14.80" />
         <property name="port" value="13250" />
+        <property name="packager-config" value="cfg/atompackager.xml"/>
     </channel>
 
-    <!-- <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.iso.packager.GenericPackager"
+    
+
+    
+    <in>jpos-send</in>
+    <out>jpos-receive</out>
+    <reconnect-delay>10000</reconnect-delay>
+</channel-adaptor>
+
+<!-- Sample channel code -->
+<!-- <channel class="org.jpos.iso.channel.XMLChannel" packager="org.jpos.iso.packager.XMLPackager">
+        <property name="host" value="localhost" />
+        <property name="port" value="10000" />
+    </channel> -->
+<!-- <channel class="org.jpos.iso.channel.NCCChannel" packager="org.atom.gateway.packager.SacomPackager"
+    header="6000190002">
+        <property name="host" value="113.164.14.80" />
+        <property name="port" value="13250" />
+    </channel> -->
+<!-- <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.iso.packager.GenericPackager"
     header="6000190002">
         <property name="packager-config" value="cfg/atompackager.xml"/>
         <property name="host" value="localhost" />
         <property name="port" value="10000" />
     </channel> -->
-    <in>jpos-send</in>
-    <out>jpos-receive</out>
-    <reconnect-delay>10000</reconnect-delay>
-</channel-adaptor>
+<!-- <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.iso.packager.GenericPackager" header="6000190002">
+        <property name="packager-config" value="cfg/atompackager.xml" />
+        <property name="host" value="127.0.0.1" />
+        <property name="port" value="10000" />
+    </channel> -->

@@ -1,15 +1,10 @@
-<server class="org.jpos.q2.iso.QServer" logger="Q2" name="xml-server-8000" realm="xml-server-8000">
+<server class="org.jpos.q2.iso.QServer" logger="Q2" name="atom-payment-processor" realm="atom-payment-processor-8899">
     <attr name="port" type="java.lang.Integer">8899</attr>
-    <!-- <channel class="org.jpos.iso.channel.XMLChannel" packager="org.jpos.iso.packager.XMLPackager"
-        type="server" logger="Q2" realm="xml-server-8081">
-        <property name="timeout" value="180000" />
-    </channel> -->
-    <!-- <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.testbed.packager.SacomPackager"
-            header="6000190002"
-            type="server" logger="Q2" realm="NACC-server-8081" >
-        <property name="timeout" value="180000" />
-    </channel> -->
-    <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.iso.packager.GenericPackager" header="6000190002" type="server" logger="Q2" realm="NACC-server-8081">
+    <channel class="org.jpos.iso.channel.NCCChannel" 
+    packager="org.jpos.iso.packager.GenericPackager" 
+    header="6000190002" 
+    type="server" logger="Q2" 
+    realm="NCCC-server-8899">
         <property name="packager-config" value="cfg/atompackager.xml"/>
         <property name="timeout" value="180000" />
     </channel>
@@ -19,3 +14,14 @@
     </request-listener>
 
 </server>
+
+<!-- Sample channel code -->
+<!-- <channel class="org.jpos.iso.channel.XMLChannel" packager="org.jpos.iso.packager.XMLPackager"
+        type="server" logger="Q2" realm="xml-server-8081">
+        <property name="timeout" value="180000" />
+    </channel> -->
+    <!-- <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.testbed.packager.SacomPackager"
+            header="6000190002"
+            type="server" logger="Q2" realm="NACC-server-8081" >
+        <property name="timeout" value="180000" />
+    </channel> -->

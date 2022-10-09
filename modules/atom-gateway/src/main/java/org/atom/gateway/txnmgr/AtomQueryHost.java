@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.SocketException;
 
+import javax.print.attribute.standard.MediaSize.ISO;
+
 import org.jpos.core.Configurable;
 import org.jpos.core.Configuration;
 import org.jpos.core.ConfigurationException;
 import org.jpos.iso.*;
 import org.jpos.iso.channel.NCCChannel;
 import org.jpos.iso.packager.ISO87BPackager;
+import org.jpos.iso.packager.GenericPackager;
 import org.jpos.rc.CMF;
 import org.jpos.rc.Result;
 import org.jpos.transaction.ContextConstants;
@@ -35,30 +38,27 @@ public class AtomQueryHost implements TransactionParticipant, ISOResponseListene
     private String destination;
     private boolean continuations;
     private Configuration cfg;
-    // private String request;
+    private String request;
     private boolean ignoreUnreachable;
     private boolean checkConnected= true;
 
+    // Constuctor
     public AtomQueryHost () {
         super();
     }
+
+    // Step 1: Prepare
     public int prepare (long id, Serializable ser)  {
         Context ctx = (Context) ser;
 
         Result result = ctx.getResult();
-
-
         String ds = ctx.getString(destination);
-
-        
         if (ds == null) {
             return result.fail(
               CMF.MISCONFIGURED_ENDPOINT, Caller.info(), "'%s' not present in Context", destination
             ).FAIL();
         }
-
         String muxName = cfg.get ("mux." + ds , "mux." + ds);
-
         MUX mux =  NameRegistrar.getIfExists (muxName);
         if (mux == null)
             return result.fail(CMF.MISCONFIGURED_ENDPOINT, Caller.info(), "MUX '%s' not found", muxName).FAIL();
@@ -76,10 +76,6 @@ public class AtomQueryHost implements TransactionParticipant, ISOResponseListene
                     return PREPARED | READONLY | PAUSE | NO_JOIN;
                 } else {
                     ISOMsg resp = mux.request(m, t);
-                    System.out.println("====== Mux Response Received ======");
-                    resp.dump(System.out, "   ");
-                    System.out.println("=================");
-
                     if (resp != null) {
                         ctx.put(responseName, resp);
                         return PREPARED | READONLY | NO_JOIN;
@@ -103,13 +99,9 @@ public class AtomQueryHost implements TransactionParticipant, ISOResponseListene
     @Override
     public void responseReceived (ISOMsg resp, Object handBack) {
         Context ctx = (Context) handBack;
-        System.out.println("====== Response Received ======");
-        resp.dump(System.out, "   ");
-        System.out.println("=================");
         ctx.put (responseName, resp);
         ctx.resume();
     }
-
     @Override
     public void expired (Object handBack) {
         Context ctx = (Context) handBack;
@@ -142,43 +134,5 @@ public class AtomQueryHost implements TransactionParticipant, ISOResponseListene
             ISOUtil.sleep (500);
         }
         return false;
-    }
-
-
-
-
-    private static void logISOMsg(ISOMsg msg) {
-        System.out.println("-----  Query Host Log: ISO MESSAGE to Pack-----");
-        try {
-            System.out.println("  MTI : " + msg.getMTI());
-            for (int i = 1; i <= msg.getMaxField(); i++) {
-                if (msg.hasField(i)) {
-                    System.out.println("    Field-" + i + " : " + msg.getString(i));
-                }
-            }
-        } catch (ISOException e) {
-            e.printStackTrace();
-        } finally {
-            System.out.println("--------------------");
-        }
-    }
-
-    private static void sendmsg(ISOMsg m, ISOSource src) throws IOException , ISOException {
-
-        System.out.println(" ----- Send run ----");
-        ISO87BPackager packager = new ISO87BPackager();
-        String hostName = "113.164.14.80";
-        int portNumber = 13250;
-        NCCChannel channel = new NCCChannel(hostName, portNumber, packager, ISOUtil.hex2byte("6000190002"));
-        channel.setTimeout(30000);
-        m.recalcBitMap();
-        channel.connect();
-        channel.send(m);
-        ISOMsg response = channel.receive();
-        System.out.println(" ----- Receive  Response run ----");
-        logISOMsg(response);
-        System.out.println(" the Source " + src);
-        src.send(response);
-
     }
 }

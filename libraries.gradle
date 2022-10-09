@@ -133,7 +133,10 @@ ext {
             liquibase: "org.liquibase:liquibase-core:${liquibaseVersion}",
 
             elk: "org.elasticsearch.client:elasticsearch-rest-high-level-client:${elkVersion}",
-            orgJson: "org.json:json:${orgjsonVersion}"
+            orgJson: "org.json:json:${orgjsonVersion}",
+            
+            //Redis
+            redis: 'redis.clients:jedis:4.3.0-m2'
     ]
 
     jsonSchemaValidatorLibs = [

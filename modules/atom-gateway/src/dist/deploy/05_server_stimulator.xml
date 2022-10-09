@@ -20,8 +20,9 @@
 <server class="org.jpos.q2.iso.QServer" logger="Q2" name="simulator_10000">
   <attr name="port" type="java.lang.Integer">10000</attr>
 
-  <channel class="org.jpos.iso.channel.NCCChannel" logger="Q2" packager="org.atom.gateway.packager.SacomPackager"
+  <channel class="org.jpos.iso.channel.NCCChannel" logger="Q2" packager="org.jpos.iso.packager.GenericPackager"
   header="6000190002">
+    <property name="packager-config" value="cfg/atompackager.xml"/>
     <!-- <filter class='org.jpos.iso.filter.ChannelInfoFilter' direction='both'>
       <property name='channel-name' value='1000' />
       <property name='socket-info' value='1001' />

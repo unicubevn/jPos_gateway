@@ -1,4 +1,5 @@
 <mux class="org.atom.gateway.channel.QMUX" logger="Q2" name="jPOS-AUTORESPONDER">
+<!-- <mux class="org.jpos.q2.iso.QMUX" logger="Q2" name="jPOS-AUTORESPONDER"> -->
     <in>jpos-receive</in>
     <out>jpos-send</out>
     <ready>jpos-channel.ready</ready>
