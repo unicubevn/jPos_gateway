@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE isopackager PUBLIC "-//jPOS/jPOS Generic Packager DTD 1.0//EN" "http://jpos.org/dtd/generic-packager-1.0.dtd">
-<!-- <!DOCTYPE isopackager 
+<!-- <!DOCTYPE isopackager PUBLIC "-//jPOS/jPOS Generic Packager DTD 1.0//EN" "http://jpos.org/dtd/generic-packager-1.0.dtd"> -->
+<!DOCTYPE isopackager 
 [
 <!ELEMENT isopackager (isofield+,isofieldpackager*)*>
 <!ATTLIST isopackager maxValidField     CDATA        #IMPLIED>
@@ -8,10 +8,10 @@
 <!ATTLIST isopackager thirdBitmapField  CDATA        #IMPLIED>
 <!ATTLIST isopackager firstField        CDATA        #IMPLIED>
 <!ATTLIST isopackager emitBitmap        (true|false) #IMPLIED>
-<!ATTLIST isopackager headerLength      CDATA        #IMPLIED> -->
+<!ATTLIST isopackager headerLength      CDATA        #IMPLIED>
 
 <!-- isofield -->
-<!-- <!ELEMENT isofield (#PCDATA)>
+<!ELEMENT isofield (#PCDATA)>
 <!ATTLIST isofield id     CDATA        #REQUIRED>
 <!ATTLIST isofield length CDATA        #REQUIRED>
 <!ATTLIST isofield name   CDATA        #REQUIRED>
@@ -20,10 +20,10 @@
 <!ATTLIST isofield encoding CDATA      #IMPLIED>
 <!ATTLIST isofield token  CDATA        #IMPLIED>
 <!ATTLIST isofield pad    (true|false) #IMPLIED>
-<!ATTLIST isofield trim (true|false) #IMPLIED> -->
+<!ATTLIST isofield trim (true|false) #IMPLIED>
 
 <!-- isofieldpackager -->
-<!-- <!ELEMENT isofieldpackager (isofield+,isofieldpackager*)*>
+<!ELEMENT isofieldpackager (isofield+,isofieldpackager*)*>
 <!ATTLIST isofieldpackager id       CDATA        #REQUIRED>
 <!ATTLIST isofieldpackager name     CDATA        #REQUIRED>
 <!ATTLIST isofieldpackager length   CDATA        #REQUIRED>
@@ -38,7 +38,7 @@
 <!ATTLIST isofieldpackager firstField  CDATA        #IMPLIED>
 <!ATTLIST isofieldpackager headerLength  CDATA        #IMPLIED>
 ]
-> -->
+>
 
 <!-- ISO 8583:1987 (BINARY) field descriptions for GenericPackager -->
 
@@ -125,14 +125,14 @@
         <isofield id="12" length="12" name="National/CitizenID" class="org.jpos.iso.IFB_LLCHAR" />
         <isofield id="13" length="14" pad="true" name="Payment Plan" class="org.jpos.iso.IFB_LLNUM" />
         <isofield id="14" length="900" pad="true" name="Signature Data" class="org.jpos.iso.IFB_LLLCHAR" />
-        <isofield id="15" length="1" pad="true" name="N/A" class="org.jpos.iso.IFB_LLNUM" />
+        <isofield id="15" length="6" pad="true" name="Bank Code" class="org.jpos.iso.IFB_LLCHAR" />
         <isofield id="16" length="1" pad="true" name="N/A" class="org.jpos.iso.IFB_LLNUM" />
         <isofield id="17" length="1" pad="true" name="N/A" class="org.jpos.iso.IFB_LLNUM" />
         <isofield id="18" length="1" pad="true" name="N/A" class="org.jpos.iso.IFB_LLNUM" />
         <isofield id="19" length="1" pad="true" name="N/A" class="org.jpos.iso.IFB_LLNUM" />
         <isofield id="20" length="24" name="Serial Number" class="org.jpos.iso.IFB_LLCHAR" />
         <isofield id="21" length="24" pad="true" name="ATOM Transaction ID" class="org.jpos.iso.IFB_LLHEX" />
-        <isofield id="22" length="48" pad="true" name="ATOM Authen Token" class="org.jpos.iso.IFB_LLHEX" />
+        <isofield id="22" length="255" pad="true" name="ATOM Authen Token" class="org.jpos.iso.IFB_LLLCHAR" />
         <isofield id="23" length="48" pad="true" name="PIN Encryption Key" class="org.jpos.iso.IFB_LLHEX" />
         <isofield id="24" length="48" pad="true" name="DUK/PT KEY SERIAL NUMBER" class="org.jpos.iso.IFB_LLHEX" />
         <isofield id="25" length="48" pad="true" name="MAC Key" class="org.jpos.iso.IFB_LLHEX" />
