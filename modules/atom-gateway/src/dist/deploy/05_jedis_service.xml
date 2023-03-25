@@ -1,8 +1,8 @@
 <!-- deploy/05_jedis_service.xml -->
-<jedis-service class="org.atom.gateway.space.JedisService" logger="Q2">
-    <property name="host" value="localhost" />
-    <property name="port" value="6379" />
-    <property name="timeout" value="120000" />
-    <property name="ping-every" value="600000" />
-    <property name="ping" value="120000" />
- </jedis-service>
+<!--<jedis-service class="org.atom.gateway.space.JedisService" logger="Q2">-->
+<!--    <property name="host" value="localhost" />-->
+<!--    <property name="port" value="6379" />-->
+<!--    <property name="timeout" value="120000" />-->
+<!--    <property name="ping-every" value="600000" />-->
+<!--    <property name="ping" value="120000" />-->
+<!-- </jedis-service>-->

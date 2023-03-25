@@ -14,6 +14,7 @@ import org.jpos.util.NameRegistrar;
 
 import redis.clients.jedis.Jedis;
 
+@SuppressWarnings("unchecked")
 public class JedisLogListener implements Configurable, LogListener, Runnable {
     String jedisService;
     String jedisQueue;

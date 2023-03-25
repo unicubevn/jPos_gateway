@@ -1,0 +1,3 @@
+#!/bin/bash
+exec modules/testbed/build/install/testbed/bin/q2 "$*"
+

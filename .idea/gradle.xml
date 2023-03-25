@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/modules" />
+            <option value="$PROJECT_DIR$/modules/atom-gateway" />
+            <option value="$PROJECT_DIR$/modules/binlog" />
+            <option value="$PROJECT_DIR$/modules/binlog-quartz" />
+            <option value="$PROJECT_DIR$/modules/bom" />
+            <option value="$PROJECT_DIR$/modules/client-simulator" />
+            <option value="$PROJECT_DIR$/modules/cmf" />
+            <option value="$PROJECT_DIR$/modules/core" />
+            <option value="$PROJECT_DIR$/modules/cryptoserver" />
+            <option value="$PROJECT_DIR$/modules/cryptoservice" />
+            <option value="$PROJECT_DIR$/modules/db-flyway" />
+            <option value="$PROJECT_DIR$/modules/db-h2" />
+            <option value="$PROJECT_DIR$/modules/db-mssql" />
+            <option value="$PROJECT_DIR$/modules/db-mysql" />
+            <option value="$PROJECT_DIR$/modules/db-postgresql" />
+            <option value="$PROJECT_DIR$/modules/dbsupport" />
+            <option value="$PROJECT_DIR$/modules/eerest" />
+            <option value="$PROJECT_DIR$/modules/eeresttest" />
+            <option value="$PROJECT_DIR$/modules/eeuser" />
+            <option value="$PROJECT_DIR$/modules/elasticsearch" />
+            <option value="$PROJECT_DIR$/modules/freemarker-decorator" />
+            <option value="$PROJECT_DIR$/modules/fsdmsgx" />
+            <option value="$PROJECT_DIR$/modules/groovy" />
+            <option value="$PROJECT_DIR$/modules/http-client" />
+            <option value="$PROJECT_DIR$/modules/iso-http-client" />
+            <option value="$PROJECT_DIR$/modules/iso-http-server" />
+            <option value="$PROJECT_DIR$/modules/iso-http-servlet" />
+            <option value="$PROJECT_DIR$/modules/jetty" />
+            <option value="$PROJECT_DIR$/modules/logback" />
+            <option value="$PROJECT_DIR$/modules/mail" />
+            <option value="$PROJECT_DIR$/modules/minigl" />
+            <option value="$PROJECT_DIR$/modules/qi-core" />
+            <option value="$PROJECT_DIR$/modules/qi-eeuser" />
+            <option value="$PROJECT_DIR$/modules/qi-minigl" />
+            <option value="$PROJECT_DIR$/modules/qi-sysconfig" />
+            <option value="$PROJECT_DIR$/modules/qrest" />
+            <option value="$PROJECT_DIR$/modules/quartz" />
+            <option value="$PROJECT_DIR$/modules/rest-testbed" />
+            <option value="$PROJECT_DIR$/modules/resultcode" />
+            <option value="$PROJECT_DIR$/modules/rspace" />
+            <option value="$PROJECT_DIR$/modules/saf" />
+            <option value="$PROJECT_DIR$/modules/saf-monitor" />
+            <option value="$PROJECT_DIR$/modules/seqno" />
+            <option value="$PROJECT_DIR$/modules/server-simulator" />
+            <option value="$PROJECT_DIR$/modules/status" />
+            <option value="$PROJECT_DIR$/modules/sysconfig" />
+            <option value="$PROJECT_DIR$/modules/syslog" />
+            <option value="$PROJECT_DIR$/modules/testbed" />
+            <option value="$PROJECT_DIR$/modules/things" />
+            <option value="$PROJECT_DIR$/modules/txn" />
+            <option value="$PROJECT_DIR$/modules/visitor" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

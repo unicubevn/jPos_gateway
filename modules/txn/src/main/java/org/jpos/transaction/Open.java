@@ -21,6 +21,7 @@ package org.jpos.transaction;
 import org.jpos.core.Configuration;
 import org.jpos.core.ConfigurationException;
 import org.jpos.ee.DB;
+import org.jpos.util.Log;
 
 import java.io.Serializable;
 
@@ -29,29 +30,38 @@ import static org.jpos.transaction.TxnConstants.TX;
 
 public class Open extends TxnSupport {
     int timeout = 0;
-    public int prepare (long id, Serializable o) {
+
+    @Override
+    public int prepare(long id, Serializable o) {
         int rc = ABORTED;
         Context ctx = (Context) o;
+        System.out.println(ctx);
         try {
-            DB db = getDB (ctx);
-            db.open ();
-            ctx.put (TX, db.beginTransaction(timeout));
-            checkPoint (ctx);
+            DB db = getDB(ctx);
+            db.open();
+            ctx.put(TX, db.beginTransaction(timeout));
+            checkPoint(ctx);
             rc = PREPARED;
         } catch (Throwable t) {
-            error (t);
-            ctx.remove (DB); // "Close" participant checks 
-                             // for DB in Context
+            error(t);
+            ctx.remove(DB); // "Close" participant checks
+                            // for DB in Context
         }
         return rc | NO_JOIN | READONLY;
     }
-    public void commit (long id, Serializable o) { }
-    public void abort  (long id, Serializable o) { }
-    public void setConfiguration (Configuration cfg) 
-        throws ConfigurationException
-    {
-        super.setConfiguration (cfg);
-        this.timeout = cfg.getInt ("timeout", 0);
+
+    @Override
+    public void commit(long id, Serializable o) {
+    }
+
+    @Override
+    public void abort(long id, Serializable o) {
+    }
+
+    @Override
+    public void setConfiguration(Configuration cfg)
+            throws ConfigurationException {
+        super.setConfiguration(cfg);
+        this.timeout = cfg.getInt("timeout", 0);
     }
 }
-

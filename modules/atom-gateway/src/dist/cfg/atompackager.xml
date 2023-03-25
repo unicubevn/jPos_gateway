@@ -45,7 +45,7 @@
 <isopackager>
     <isofield id="0" length="4" name="MESSAGE TYPE INDICATOR" pad="true" class="org.jpos.iso.IFB_NUMERIC" />
     <isofield id="1" length="16" name="BIT MAP" class="org.jpos.iso.IFB_BITMAP" />
-    <isofield id="2" length="19" name="PAN - PRIMARY ACCOUNT NUMBER" pad="false" class="org.jpos.iso.IFB_LLNUM" />
+    <isofield id="2" length="64" name="PAN - PRIMARY ACCOUNT NUMBER" pad="false" class="org.jpos.iso.IFB_LLCHAR" />
     <isofield id="3" length="6" name="PROCESSING CODE" pad="true" class="org.jpos.iso.IFB_NUMERIC" />
     <isofield id="4" length="12" name="AMOUNT, TRANSACTION" pad="true" class="org.jpos.iso.IFB_NUMERIC" />
     <isofield id="5" length="12" name="AMOUNT, SETTLEMENT" pad="true" class="org.jpos.iso.IFB_NUMERIC" />
@@ -57,7 +57,7 @@
     <isofield id="11" length="6" name="SYSTEM TRACE AUDIT NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC" />
     <isofield id="12" length="6" name="TIME, LOCAL TRANSACTION" pad="true" class="org.jpos.iso.IFB_NUMERIC" />
     <isofield id="13" length="4" name="DATE, LOCAL TRANSACTION" pad="true" class="org.jpos.iso.IFB_NUMERIC" />
-    <isofield id="14" length="4" name="DATE, EXPIRATION" pad="true" class="org.jpos.iso.IFB_NUMERIC" />
+    <isofield id="14" length="44" name="DATE, EXPIRATION" pad="true" class="org.jpos.iso.IFB_LLCHAR" />
     <isofield id="15" length="4" name="DATE, SETTLEMENT" pad="true" class="org.jpos.iso.IFB_NUMERIC" />
     <isofield id="16" length="4" name="DATE, CONVERSION" pad="true" class="org.jpos.iso.IFB_NUMERIC" />
     <isofield id="17" length="4" name="DATE, CAPTURE" pad="true" class="org.jpos.iso.IFB_NUMERIC" />
@@ -78,7 +78,7 @@
     <isofield id="32" length="11" name="ACQUIRING INSTITUTION IDENT CODE" pad="false" class="org.jpos.iso.IFB_LLNUM" />
     <isofield id="33" length="11" name="FORWARDING INSTITUTION IDENT CODE" pad="false" class="org.jpos.iso.IFB_LLNUM" />
     <isofield id="34" length="28" name="PAN EXTENDED" class="org.jpos.iso.IFB_LLCHAR" />
-    <isofield id="35" length="37" name="TRACK 2 DATA" pad="false" class="org.jpos.iso.IFB_LLNUM" />
+    <isofield id="35" length="88" name="TRACK 2 DATA" pad="false" class="org.jpos.iso.IFB_LLCHAR" />
     <isofield id="36" length="104" name="TRACK 3 DATA" class="org.jpos.iso.IFB_LLLCHAR" />
     <isofield id="37" length="12" name="RETRIEVAL REFERENCE NUMBER" class="org.jpos.iso.IF_CHAR" />
     <isofield id="38" length="6" name="AUTHORIZATION IDENTIFICATION RESPONSE" class="org.jpos.iso.IF_CHAR" />
@@ -100,17 +100,11 @@
     <isofield id="54" length="120" name="ADDITIONAL AMOUNTS" class="org.jpos.iso.IFB_LLLCHAR" />
     <isofield id="55" length="999" name="RESERVED ISO" class="org.jpos.iso.IFB_LLLCHAR" />
     <isofield id="56" length="999" name="RESERVED ISO" class="org.jpos.iso.IF_CHAR" />
-    <isofield id="57" length="999" name="RESERVED NATIONAL" class="org.jpos.iso.IFB_LLLCHAR" />
-    <isofield id="58" length="999" name="RESERVED NATIONAL" class="org.jpos.iso.IFB_LLLCHAR" />
-    <isofield id="59" length="999" name="RESERVED NATIONAL" class="org.jpos.iso.IFB_LLLCHAR" />
-    <isofield id="60" length="999" name="RESERVED PRIVATE" class="org.jpos.iso.IFB_LLLCHAR" />
-    <isofield id="61" length="999" name="RESERVED PRIVATE" class="org.jpos.iso.IFB_LLLCHAR" />
-    <isofield id="62" length="999" name="RESERVED PRIVATE" class="org.jpos.iso.IFB_LLLCHAR" />
 
-    <isofieldpackager id="63" length="9999" name="ADDITIONAL DATA" class="org.jpos.iso.IFB_LLLLBINARY" 
+    <isofieldpackager id="57" length="9999" name="ADDITIONAL DATA" class="org.jpos.iso.IFB_LLLLBINARY" 
     emitBitmap="false" bitmapField="0" packager="org.jpos.iso.packager.GenericSubFieldPackager">
         <!-- <isofieldpackager id="63" length="9999" name="ADDITIONAL DATA" class="org.jpos.iso.IFB_LLLLBINARY" emitBitmap="false" packager="org.jpos.iso.packager.GenericSubFieldPackager"> -->
-        <isofield id="0" length="0" name="Placeholder" class="org.jpos.iso.IF_NOP" />
+            <isofield id="0" length="0" name="Placeholder" class="org.jpos.iso.IF_NOP" />
         <isofield id="1" length="4" name="Network Identification Code" class="org.jpos.iso.IFB_LLNUM" />
         <isofield id="2" length="4" name="Time (Preauth Time Limit)" class="org.jpos.iso.IFB_LLNUM" />
         <isofield id="3" length="4" name="Message Reason Code" class="org.jpos.iso.IFB_LLNUM" />
@@ -126,20 +120,27 @@
         <isofield id="13" length="14" pad="true" name="Payment Plan" class="org.jpos.iso.IFB_LLNUM" />
         <isofield id="14" length="900" pad="true" name="Signature Data" class="org.jpos.iso.IFB_LLLCHAR" />
         <isofield id="15" length="6" pad="true" name="Bank Code" class="org.jpos.iso.IFB_LLCHAR" />
-        <isofield id="16" length="1" pad="true" name="N/A" class="org.jpos.iso.IFB_LLNUM" />
+        <isofield id="16" length="999" name="Hash of message" class="org.jpos.iso.IFB_LLLCHAR" />
         <isofield id="17" length="1" pad="true" name="N/A" class="org.jpos.iso.IFB_LLNUM" />
         <isofield id="18" length="1" pad="true" name="N/A" class="org.jpos.iso.IFB_LLNUM" />
         <isofield id="19" length="1" pad="true" name="N/A" class="org.jpos.iso.IFB_LLNUM" />
         <isofield id="20" length="24" name="Serial Number" class="org.jpos.iso.IFB_LLCHAR" />
         <isofield id="21" length="24" pad="true" name="ATOM Transaction ID" class="org.jpos.iso.IFB_LLHEX" />
         <isofield id="22" length="255" pad="true" name="ATOM Authen Token" class="org.jpos.iso.IFB_LLLCHAR" />
-        <isofield id="23" length="48" pad="true" name="PIN Encryption Key" class="org.jpos.iso.IFB_LLHEX" />
+        <isofield id="23" length="48" pad="false" name="ATOM ENCRYPTION KEY" class="org.jpos.iso.IFB_LLCHAR" />
         <isofield id="24" length="48" pad="true" name="DUK/PT KEY SERIAL NUMBER" class="org.jpos.iso.IFB_LLHEX" />
         <isofield id="25" length="48" pad="true" name="MAC Key" class="org.jpos.iso.IFB_LLHEX" />
+        <isofield id="26" length="48" pad="true" name="PIN Encryption Key" class="org.jpos.iso.IFB_LLHEX" />
         
     </isofieldpackager>
 
 
+    <isofield id="58" length="999" name="RESERVED NATIONAL" class="org.jpos.iso.IFB_LLLCHAR" />
+    <isofield id="59" length="999" name="RESERVED NATIONAL" class="org.jpos.iso.IFB_LLLCHAR" />
+    <isofield id="60" length="999" name="RESERVED PRIVATE" class="org.jpos.iso.IFB_LLLCHAR" />
+    <isofield id="61" length="999" name="RESERVED PRIVATE" class="org.jpos.iso.IFB_LLLCHAR" />
+    <isofield id="62" length="999" name="RESERVED PRIVATE" class="org.jpos.iso.IFB_LLLCHAR" />
+    <isofield id="63" length="999" name="RESERVED PRIVATE" class="org.jpos.iso.IFB_LLLCHAR" />
     <isofield id="64" length="8" name="MESSAGE AUTHENTICATION CODE FIELD" class="org.jpos.iso.IFB_BINARY" />
     <isofield id="65" length="1" name="BITMAP, EXTENDED" class="org.jpos.iso.IFB_BINARY" />
     <isofield id="66" length="1" name="SETTLEMENT CODE" pad="true" class="org.jpos.iso.IFB_NUMERIC" />

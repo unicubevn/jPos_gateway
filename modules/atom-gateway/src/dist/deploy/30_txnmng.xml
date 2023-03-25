@@ -4,10 +4,91 @@
     <property name="max-sessions" value="128" />
     <property name="debug" value="true" />
 
-    <participant class="org.atom.gateway.txnmgr.StepOne"> 
-        <!-- <property name="bin.411111" value="MYMUX" /> -->
-    </participant>
-    <!-- <participant class="org.jpos.transaction.participant.QueryHost" /> -->
-    <participant class="org.atom.gateway.txnmgr.AtomQueryHost"/>
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S1PrepareContext" logger="Q2" realm="prepare-context">-->
+<!--        <property name="message" value="Prepare Context" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S2CheckVersion" logger="Q2" realm="check_version">-->
+<!--        <property name="message" value="Check Message Version" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S3Open" logger="Q2" realm="open">-->
+<!--        <property name="checkpoint" value="Open DB Connection" />-->
+<!--        <property name="timeout" value="300" />-->
+<!--        <property name="DB" value="jposee" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S4Switch" logger="Q2" realm="switch">-->
+<!--        <property name="message" value="Switch" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S5CheckFields" logger="Q2" realm="check-field">-->
+<!--        <property name="message" value="Check field" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S6CreateTranLog" logger="Q2" realm="create-trans-log">-->
+<!--        <property name="message" value="Create Transaction Log" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S7CheckCard" logger="Q2" realm="check-card">-->
+<!--        <property name="message" value="Check Card" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S8CheckTerminal" logger="Q2" realm="check-terminal">-->
+<!--        <property name="message" value="Check Terminal" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S9CheckAcquirer" logger="Q2" realm="check-acquirer">-->
+<!--        <property name="message" value="Check Accquirer" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S10SelectAccount" logger="Q2" realm="select-account">-->
+<!--        <property name="message" value="Select Account" />-->
+<!--    </participant>-->
+
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S11SendToBank" logger="Q2" realm="send-to-bank">-->
+<!--        <property name="message" value="Send To Bank/Gateway" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S12PrepareResponse" logger="Q2" realm="prepare-response">-->
+<!--        <property name="message" value="Prepare Response" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S13LogIt" logger="Q2" realm="log-it">-->
+<!--        <property name="message" value="Log it" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S14Close" logger="Q2" realm="close">-->
+<!--        <property name="checkpoint" value="Close Db Connection" />-->
+<!--        <property name="DB" value="jposee" />-->
+<!--        <property name="timeout" value="300" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S15SendResponse" logger="Q2" realm="send-respond">-->
+<!--        <property name="checkpoint" value="Send Response" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S16ProtectDebugInfo" logger="Q2" realm="protect-debug-info">-->
+<!--        <property name="checkpoint" value="Protect Debug Info" />-->
+<!--    </participant>-->
+<!--    <participant class="org.atom.gateway.txnmgr.steps.S17Debug" logger="Q2" realm="debug">-->
+<!--        <property name="checkpoint" value="Debug" />-->
+<!--    </participant>-->
+    <participant class="org.jpos.transaction.participant.QueryHost" />
     <participant class="org.jpos.transaction.participant.SendResponse" />
+
+
 </txnmgr>
+
+<!-- <participant class="org.atom.gateway.txnmgr.Open" logger="Q2" realm="open">
+        <property name="checkpoint" value="open" />
+        <property name="timeout" value="300" />
+        <property name="DB" value="jposee" />
+    </participant> -->
+
+    <!-- <participant class="org.atom.gateway.txnmgr.StepOne">
+        <property name="bin.411111" value="MYMUX" />
+    </participant> -->
+    <!-- <participant class="org.jpos.transaction.Open" logger="Q2" realm="open-db">
+        <property name="checkpoint" value="db-open" />
+    </participant>
+
+    <participant class="org.atom.gateway.txnmgr.DemoParticipant"
+        logger="Q2" realm="demo-participant" /> -->
+
+    <!-- <participant class="com.mydemo.DemoParticipant" logger="Q2" realm="demo-participant"/> -->
+
+    <!-- <participant class="org.jpos.transaction.participant.QueryHost" /> -->
+    <!-- <participant class="org.atom.gateway.txnmgr.AtomQueryHost" /> -->
+
+    <!-- <participant class="org.jpos.transaction.Close" logger="Q2" realm="close-db">
+        <property name="checkpoint" value="close" />
+    </participant> -->
+
+    <!-- <participant class="org.jpos.transaction.participant.SendResponse" /> -->

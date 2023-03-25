@@ -1,6 +1,0 @@
-<!-- deploy/00_jedis_logger.xml -->
-<logger name="JEDISLOG" class="org.jpos.q2.qbean.LoggerAdaptor">
-    <log-listener class="org.atom.gateway.space.JedisLogListener">
-        <property name="jedis-queue" value="jCardLog" />
-    </log-listener>
-</logger>

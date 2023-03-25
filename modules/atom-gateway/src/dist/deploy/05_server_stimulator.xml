@@ -21,8 +21,8 @@
   <attr name="port" type="java.lang.Integer">10000</attr>
 
   <channel class="org.jpos.iso.channel.NCCChannel" logger="Q2" packager="org.jpos.iso.packager.GenericPackager"
-  header="6000190002">
-    <property name="packager-config" value="cfg/atompackager.xml"/>
+  header="6001150001">
+    <property name="packager-config" value="cfg/eximpackager.xml"/>
     <!-- <filter class='org.jpos.iso.filter.ChannelInfoFilter' direction='both'>
       <property name='channel-name' value='1000' />
       <property name='socket-info' value='1001' />

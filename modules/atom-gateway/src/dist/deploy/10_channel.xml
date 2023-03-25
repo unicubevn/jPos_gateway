@@ -1,10 +1,18 @@
 <channel-adaptor name='jpos-channel' class="org.jpos.q2.iso.ChannelAdaptor" logger="Q2">
 
+<!--    <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.iso.packager.GenericPackager"-->
+<!--    header="6000190002">-->
+<!--        &lt;!&ndash; <property name="host" value="113.164.14.80" />-->
+<!--        <property name="port" value="13250" /> &ndash;&gt;-->
+<!--        <property name="host" value="3.1.253.156" />-->
+<!--        <property name="port" value="8899" />-->
+<!--        <property name="packager-config" value="cfg/atompackager.xml"/>-->
+<!--    </channel>-->
     <channel class="org.jpos.iso.channel.NCCChannel" packager="org.jpos.iso.packager.GenericPackager"
-    header="6000190002">
-        <property name="host" value="113.164.14.80" />
-        <property name="port" value="13250" />
-        <property name="packager-config" value="cfg/atompackager.xml"/>
+             header="6001150001">
+        <property name="packager-config" value="cfg/eximpackager.xml"/>
+        <property name="host" value="localhost" />
+        <property name="port" value="10000" />
     </channel>
 
     

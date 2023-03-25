@@ -3,6 +3,7 @@ package org.atom.gateway.txnmgr;
 import org.jpos.core.*;
 import org.jpos.iso.ISOException;
 import org.jpos.iso.ISOMsg;
+import org.jpos.iso.IFB_LLLHEX;
 import org.atom.gateway.packager.AtomPackager;
 import org.atom.gateway.packager.SacomPackager;
 import org.jpos.transaction.Context;

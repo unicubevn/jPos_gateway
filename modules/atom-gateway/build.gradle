@@ -24,6 +24,8 @@ dependencies {
     providedCompile project(':modules:visitor')
     providedCompile project(':modules:jetty')
     providedCompile project(':modules:cryptoservice')
+    providedCompile project(':modules:minigl')
+    providedCompile project(':modules:seqno')
 
     providedCompile project(':modules:server-simulator')
     providedCompile project(':modules:txn')
@@ -33,6 +35,7 @@ dependencies {
     providedCompile 'com.vaadin.external.slf4j:vaadin-slf4j-jdk14:1.6.1'
     providedCompile 'org.slf4j:jul-to-slf4j:1.7.7'
     providedCompile 'redis.clients:jedis:4.3.0-m2'
+
 }
 
 apply from: "${rootProject.projectDir}/jpos-app.gradle"

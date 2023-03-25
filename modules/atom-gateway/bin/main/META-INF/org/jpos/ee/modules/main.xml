@@ -1,0 +1,5 @@
+<module name="main">
+    <mappings>
+        <mapping class="org.atom.gateway.txnmgr.Txn"/>
+    </mappings>
+</module>
